@@ -15,6 +15,7 @@ import static org.mockito.Mockito.never;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 class ListMockTest {
 	
@@ -67,6 +68,16 @@ class ListMockTest {
 	@Test
 	public void argumentCapturing() {
 		// how to capture argument that is passed to a method call
+		
+		// system under test
+		mock.add("SomeString");
+		
+		// verification
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		verify(mock).add(captor.capture());
+		
+		assertEquals("SomeString", captor.getValue());
+		
 	}
 
 }
